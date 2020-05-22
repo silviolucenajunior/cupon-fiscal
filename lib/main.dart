@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
+import './modules/coupon/widgets/coupon_qr_scanner.dart';
+import './modules/coupon/coupon_services.dart';
+
 
 void main() {
   runApp(
@@ -33,7 +35,9 @@ class MeuCuponMainPage extends StatelessWidget {
         title: Text("Meu Cupon"),
       ),
       body: Center(
-        child: Text("Hola"),
+        child: CouponQRScanner(
+          couponService: NFCECearaCouponService()
+        ),
       ),
     );
   }
