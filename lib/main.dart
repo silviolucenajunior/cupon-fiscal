@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import './modules/coupon/widgets/coupon_qr_scanner.dart';
-import './modules/coupon/coupon_services.dart';
+import './modules/coupon/screens/home_screen.dart';
+import './modules/coupon/screens/coupon_screen.dart';
+import './modules/coupon/screens/coupon_list_screen.dart';
 
 
 void main() {
@@ -15,7 +16,10 @@ class MeuCuponApp extends StatelessWidget {
     return MaterialApp(
       title: 'Meu Cupon',
       theme: _getTheme(),
-      home: MeuCuponMainPage()
+      home: DefaultTabController(
+        length: 2,
+        child: MeuCuponMainPage()
+      ),
     );
   }
 
@@ -34,11 +38,29 @@ class MeuCuponMainPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Meu Cupon"),
       ),
-      body: Center(
-        child: CouponQRScanner(
-          couponService: NFCECearaCouponService()
-        ),
+      body: TabBarView(
+        children: <Widget>[
+          HomeScreenCoupon(),
+          CouponListScreen(),
+        ]
       ),
+      bottomNavigationBar: TabBar(
+        tabs: <Widget>[
+          Tab(
+            icon: Icon(Icons.home),
+            text: 'Scanner',
+          ),
+          Tab(
+            icon: Icon(Icons.settings),
+            text: 'Coupons',
+          )
+        ],
+        labelColor: Colors.yellow,
+        unselectedLabelColor: Colors.blue,
+        indicatorSize: TabBarIndicatorSize.label,
+        indicatorPadding: EdgeInsets.all(5.0),
+        indicatorColor: Colors.red,
+      )
     );
   }
 }
