@@ -5,7 +5,15 @@ class CouponFactory {
 
   static Coupon fromJson(Map<String, dynamic> json) {
     List<CouponItem> items = CouponFactory._getItemsFromJson(json);
-    return Coupon(json['fantasyName'], json['taxpayerObservation'], items);
+    return Coupon(
+      stablishmentName: json['fantasyName'], 
+      buyDate: json['taxpayerObservation'], 
+      items: items,
+      city: json['address']['city']['name'],
+      neighborhood: json['address']['neighborhood'],
+      state: 'Ceará',
+      address: json['address']['street'] + json['address']['number']
+    );
   }
 
   static List<CouponItem> _getItemsFromJson(Map<String, dynamic>  json) {
@@ -16,5 +24,22 @@ class CouponFactory {
     });
 
     return list;
+  }
+
+  static Coupon generateFakeCoupon() {
+    List<CouponItem> items = <CouponItem>[  generateFakeCouponItem() ];
+    return Coupon(
+      stablishmentName: "O Zezão", 
+      buyDate: "21/08/2020", 
+      items: items,
+      city: 'Fortaleza',
+      neighborhood: 'Carlito Pamplona',
+      state: 'Ceará',
+      address: 'Coelho da Fonseca 514'
+      );
+  }
+
+  static CouponItem generateFakeCouponItem() {
+    return CouponItem(100, 10, "Maça");
   }
 }

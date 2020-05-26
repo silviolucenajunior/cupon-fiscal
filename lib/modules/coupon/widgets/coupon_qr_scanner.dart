@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:qr_mobile_vision/qr_camera.dart';
 import '../coupon_services.dart';
+import '../coupon_repository.dart';
+import '../coupon_factory.dart';
 import '../models/coupon_model.dart';
 
 class CouponQRScanner extends StatefulWidget {
   final ICouponService couponService;
+  final ICouponRepository couponRepository;
 
-  CouponQRScanner({Key key, this.couponService}) : super(key :key);
+  CouponQRScanner({Key key, this.couponService, this.couponRepository}) : super(key :key);
 
   @override
   _CouponQRScannerState createState() => _CouponQRScannerState();
@@ -14,6 +17,7 @@ class CouponQRScanner extends StatefulWidget {
 
 class _CouponQRScannerState extends State<CouponQRScanner> {
   bool scanning = false;
+  bool scaned = false; //HACK is a hack to manipulate the multiple scan of dependency
 
   @override
   Widget build( BuildContext context ) {
@@ -40,10 +44,14 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
             error.toString(),
             style: TextStyle(color: Colors.red),
           ),
-          qrCodeCallback: (code) {
-            String couponCode = this._extractCouponCodeFromQRCode(code);
-            Coupon coupon = this.widget.couponService.getCouponInformationByCouponCode(couponCode);
-            this._redirectToCouponDetail(coupon);
+          qrCodeCallback: (code) async {
+            if (scaned == false )  {
+              scaned = true;
+              String couponCode = this._extractCouponCodeFromQRCode(code);
+              Coupon coupon = await this.widget.couponService.getCouponInformationByCouponCode(couponCode) as Coupon;
+              this.widget.couponRepository.save(coupon);
+              this._redirectToCouponDetail(coupon);
+            }
           },
         ),
       )
@@ -51,7 +59,7 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
       Container(
         width: 320,
         height: 320,
-        color: Colors.green
+        child: Icon(Icons.crop_free, size: 300, color: Colors.blue[300]),
       );
   }
 
@@ -65,8 +73,9 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
 
   Widget _getScannerActions () {
     return Row(
-        children: [
-          RaisedButton(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        RaisedButton(
           padding: EdgeInsets.all(10),
           onPressed: () {
             this.setState( () => {
@@ -79,6 +88,29 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
             children: [
               Icon(
                 Icons.photo_camera
+              ),
+              Text(
+                "Scans",
+                style: TextStyle(
+                  fontSize: 12
+                )
+              )
+            ]
+          )
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        RaisedButton(
+          padding: EdgeInsets.all(10),
+          onPressed: () {
+            Coupon coupon = CouponFactory.generateFakeCoupon();
+            this.widget.couponRepository.save(coupon);
+          },
+          child: Column(
+            children: [
+              Icon(
+                Icons.plus_one
               ),
               Text(
                 "Scans",

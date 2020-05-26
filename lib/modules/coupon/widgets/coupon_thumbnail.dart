@@ -1,40 +1,58 @@
 import 'package:flutter/material.dart';
+import '../models/coupon_model.dart';
 
 class CouponThumbnailWidget extends StatelessWidget {
+  Coupon coupon;
+
+  CouponThumbnailWidget({Key key, this.coupon}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
+    // return Card(
+    //   child: Container(
+    //     padding: EdgeInsets.all(10),
+    //     width: 600,
+    //     child: Row(
+    //       mainAxisSize: MainAxisSize.min,
+    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //       children: <Widget>[
+    //         _getDateWidget(),
+    //         _getPriceWidget(),
+    //         _getStablishmentWidget(),
+    //       ]
+    //     )
+    //   )
+    // );
+    return Container(
         padding: EdgeInsets.all(10),
         width: 600,
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            CouponThumbnailWidget._getDateWidget(),
-            CouponThumbnailWidget._getPriceWidget(),
-            CouponThumbnailWidget._getStablishmentWidget(),
+            _getDateWidget(),
+            _getPriceWidget(),
+            _getStablishmentWidget(),
           ]
         )
-      )
     );
   }
   
-  static Widget _getStablishmentWidget() {
+  Widget _getStablishmentWidget() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "Mercadinho Melhor Opção",
+          coupon.stablishmentName,
           style: TextStyle(
             fontSize: 12,
           ),
         ),
-        Text("Rua Paste, 514, Carlito Pamplona",
+        Text(coupon.address,
             style: TextStyle(
             fontSize: 12,
           ),),
-        Text("Fortaleza/Ceara",
+        Text(coupon.city + "/" + coupon.state,
             style: TextStyle(
             fontSize: 12,
           ),),
@@ -42,18 +60,18 @@ class CouponThumbnailWidget extends StatelessWidget {
     );
   }
   
-  static Widget _getDateWidget() {
+  Widget _getDateWidget() {
     return Text(
-      "21/08/1987",
+      coupon.buyDate,
       style: TextStyle(
         fontSize: 12
       )
     );
   }
   
-  static Widget _getPriceWidget() {
+  Widget _getPriceWidget() {
     return Text(
-      r"R$ 300,00",
+      r"R$ " + coupon.getTotalPrice().toString(),
       style: TextStyle(
         fontSize: 12
       )

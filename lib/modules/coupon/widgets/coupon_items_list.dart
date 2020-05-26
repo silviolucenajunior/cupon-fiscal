@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import '../models/coupon_item_model.dart';
 
 class CouponItemWidget extends StatelessWidget {
   const CouponItemWidget({
     Key key,
     this.color,
+    this.item
   }) : super(key: key);
   
   final color;
+  final CouponItem item;
   
   @override
   Widget build(BuildContext context) {
@@ -24,12 +27,11 @@ class CouponItemWidget extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              CouponItemWidget._getQuantidadeWidget(),
-              CouponItemWidget._getProdutoWidget(),
-              CouponItemWidget._getUnitPriceWidget(),
-              CouponItemWidget._getTotalPriceWidget(),
+              _getQuantidadeWidget(),
+              _getProdutoWidget(),
+              _getUnitPriceWidget(),
+              _getTotalPriceWidget(),
             ]
           )
         ),
@@ -37,7 +39,7 @@ class CouponItemWidget extends StatelessWidget {
     );
   }
   
-  static Widget _getQuantidadeWidget() {
+  Widget _getQuantidadeWidget() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -49,7 +51,7 @@ class CouponItemWidget extends StatelessWidget {
           )
         ),
         Text(
-          "10",
+          item.amount.toString(),
           style: TextStyle(
             fontSize: 16,
             color: Colors.black,
@@ -59,11 +61,11 @@ class CouponItemWidget extends StatelessWidget {
     );
   }
   
-  static Widget _getProdutoWidget(){
+  Widget _getProdutoWidget(){
     return Align(
       alignment: Alignment.bottomCenter,
       child: Text(
-        "Bolacha Recheadasss",
+        item.description,
         style: TextStyle(
           fontSize: 16,
           color: Colors.black,
@@ -72,7 +74,7 @@ class CouponItemWidget extends StatelessWidget {
     );
   }
   
-  static Widget _getUnitPriceWidget () {
+  Widget _getUnitPriceWidget () {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.max,
@@ -85,7 +87,7 @@ class CouponItemWidget extends StatelessWidget {
           )
         ),
         Text(
-          r"R$ 2,50",
+          r"R$" + item.price.toString(),
           style: TextStyle(
             fontSize: 16,
             color: Colors.black,
@@ -95,7 +97,7 @@ class CouponItemWidget extends StatelessWidget {
     );
   }
   
-  static Widget _getTotalPriceWidget () {
+  Widget _getTotalPriceWidget () {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -107,7 +109,7 @@ class CouponItemWidget extends StatelessWidget {
           )
         ),
         Text(
-          r"R$ 25,0 0",
+          r"R$ " + (item.amount * item.price).toString(),
           style: TextStyle(
             fontSize: 16,
             color: Colors.black,

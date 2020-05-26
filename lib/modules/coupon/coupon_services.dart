@@ -3,10 +3,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './coupon_factory.dart';
 import './models/coupon_model.dart';
+import './coupon_repository.dart';
 
 class ICouponService {
   Object getCouponInformationByCouponCode(String couponCode) async {
     return Object;
+  }
+
+  void save(Coupon coupon) {
   }
 }
 
@@ -19,8 +23,12 @@ class NFCECearaCouponService extends ICouponService {
     final http.Response response = await http.get(endpoint);
     final responseJson = json.decode(response.body);
 
-    return Future<Coupon>( () {
+    Future<Coupon>coupon = Future<Coupon>( () {
       return CouponFactory.fromJson(responseJson["coupon"]);
     });
+
+    //Coupon coupon = CouponFactory.fromJson(responseJson["coupon"]);
+
+    return coupon;
   }
 }

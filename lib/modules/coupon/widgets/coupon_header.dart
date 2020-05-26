@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import '../models/coupon_model.dart';
 
 class CouponHeaderWidget extends StatelessWidget {
+  final Coupon coupon;
+
+  CouponHeaderWidget({Key key, this.coupon}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,7 +30,7 @@ class CouponHeaderWidget extends StatelessWidget {
     );
   }
   
-  static Widget _getCardContent() {
+  Widget _getCardContent() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.min,
@@ -36,8 +41,8 @@ class CouponHeaderWidget extends StatelessWidget {
            crossAxisAlignment: CrossAxisAlignment.start,
            textBaseline: TextBaseline.alphabetic,
            children: <Widget>[
-             CouponHeaderWidget._getCouponValueWidget(),
-             CouponHeaderWidget._getDateWidget(),
+             this._getCouponValueWidget(),
+             this._getDateWidget(),
            ],
         ),
         Row(
@@ -46,17 +51,17 @@ class CouponHeaderWidget extends StatelessWidget {
            crossAxisAlignment: CrossAxisAlignment.end,
            textBaseline: TextBaseline.alphabetic,
            children: <Widget>[
-             CouponHeaderWidget._getStablishmentWidget(),
-             CouponHeaderWidget._getDescriptionWidget(),
+             this._getStablishmentWidget(),
+             this._getDescriptionWidget(),
            ],
         ),
       ]
      );
   }
   
-  static Widget _getCouponValueWidget() {
+  Widget _getCouponValueWidget() {
     return Text(
-      "R\$ 371,00",
+      " -- R\$" + (coupon.getTotalPrice().toString()),
       style: TextStyle(
         fontSize: 32,
         color: Colors.white,
@@ -64,9 +69,9 @@ class CouponHeaderWidget extends StatelessWidget {
     );
   }
   
-  static Widget _getDateWidget() {
+  Widget _getDateWidget() {
     return Text(
-      "21/08/2020 às 11:30",
+      coupon.buyDate,
       style: TextStyle(
         fontSize: 16,
         color: Colors.white,
@@ -74,7 +79,7 @@ class CouponHeaderWidget extends StatelessWidget {
     );
   }
   
-  static Widget _getStablishmentWidget() {
+  Widget _getStablishmentWidget() {
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -82,14 +87,14 @@ class CouponHeaderWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Mercadinho o Zezão",
+            coupon.stablishmentName,
             style: TextStyle(
               fontSize: 16,
               color: Colors.white,
             ),
           ),
           Text(
-            "Av Francisco Sá, 504, \nCarlito Pamplona\nFortaleza, Ceará",
+            coupon.address + '\n' + coupon.neighborhood + '\n' + coupon.city + '/' + coupon.state,
             style: TextStyle(
               fontSize: 10,
               color: Colors.white,
@@ -100,11 +105,11 @@ class CouponHeaderWidget extends StatelessWidget {
     );
   }
   
-  static Widget _getDescriptionWidget() {
+  Widget _getDescriptionWidget() {
     return Align(
         alignment: Alignment.centerLeft,
         child: Text(
-           "31 Items no Carrinho",
+           coupon.items.length.toString() + " Items no Carrinho",
            style: TextStyle(
              fontSize: 16,
              color: Colors.white,
@@ -112,6 +117,5 @@ class CouponHeaderWidget extends StatelessWidget {
         )
     );
   }
-  
 
 }
