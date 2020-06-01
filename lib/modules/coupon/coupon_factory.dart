@@ -12,14 +12,14 @@ class CouponFactory {
       city: json['address']['city']['name'],
       neighborhood: json['address']['neighborhood'],
       state: 'Ceará',
-      address: json['address']['street'] + json['address']['number']
+      address: json['address']['street'] + " " + json['address']['number'],
     );
   }
 
   static List<CouponItem> _getItemsFromJson(Map<String, dynamic>  json) {
     List<CouponItem> list = List<CouponItem>();
     json['items'].forEach( (jsonItem) {
-      CouponItem coupon =  CouponItem((jsonItem['price'] * 100).round(), jsonItem['amount'], jsonItem['description']);
+      CouponItem coupon =  CouponItem(jsonItem['price'], jsonItem['amount'], jsonItem['description']);
       list.add(coupon);
     });
 

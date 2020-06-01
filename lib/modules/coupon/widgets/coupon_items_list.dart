@@ -30,7 +30,6 @@ class CouponItemWidget extends StatelessWidget {
             children: <Widget>[
               _getQuantidadeWidget(),
               _getProdutoWidget(),
-              _getUnitPriceWidget(),
               _getTotalPriceWidget(),
             ]
           )
@@ -109,7 +108,7 @@ class CouponItemWidget extends StatelessWidget {
           )
         ),
         Text(
-          r"R$ " + (item.amount * item.price).toString(),
+          r"R$ " + (item.getTotalPrice() / 100).toString(),
           style: TextStyle(
             fontSize: 16,
             color: Colors.black,

@@ -44,13 +44,48 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
             error.toString(),
             style: TextStyle(color: Colors.red),
           ),
+          notStartedBuilder: (context) {
+            return Container(
+                color: Colors.white,
+                width: double.infinity,
+                height: double.infinity,
+                child: Center(
+                  child: SizedBox(
+                    width: 120,
+                    height: 120,
+                    child: CircularProgressIndicator()
+                  )
+                )
+              );
+          },
+          child: this.scaned
+            ? 
+              Container(
+                color: Colors.white,
+                width: double.infinity,
+                height: double.infinity,
+                child: Center(
+                  child: SizedBox(
+                    width: 120,
+                    height: 120,
+                    child: CircularProgressIndicator()
+                  )
+                )
+              )
+            :
+              null
+          ,
           qrCodeCallback: (code) async {
             if (scaned == false )  {
-              scaned = true;
+              setState(() => scaned = true);
               String couponCode = this._extractCouponCodeFromQRCode(code);
               Coupon coupon = await this.widget.couponService.getCouponInformationByCouponCode(couponCode) as Coupon;
               this.widget.couponRepository.save(coupon);
-              this._redirectToCouponDetail(coupon);
+              setState(() {
+                scaned = true;
+                scanning = false;
+              });
+              
             }
           },
         ),
@@ -65,10 +100,6 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
 
   String _extractCouponCodeFromQRCode(String code) {
     return code.split("|")[0];
-  }
-
-  void _redirectToCouponDetail(Coupon coupon) {
-    //TODO
   }
 
   Widget _getScannerActions () {

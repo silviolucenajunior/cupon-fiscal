@@ -71,7 +71,7 @@ class CouponThumbnailWidget extends StatelessWidget {
   
   Widget _getPriceWidget() {
     return Text(
-      r"R$ " + coupon.getTotalPrice().toString(),
+      "R\$" + (coupon.getTotalPrice() / 100).toString(),
       style: TextStyle(
         fontSize: 12
       )

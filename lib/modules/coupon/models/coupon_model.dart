@@ -22,7 +22,7 @@ class Coupon {
   int getTotalPrice() {
     int amount = 0;
     items.forEach( (item) {
-      amount += item.price;
+      amount += item.getTotalPrice();
     });
 
     return amount;

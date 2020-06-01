@@ -4,4 +4,10 @@ class CouponItem {
   String description;
 
   CouponItem(this.price, this.amount, this.description);
+
+  int getTotalPrice() {
+    int total = (amount * price).toInt();
+
+    return total;
+  }
 }

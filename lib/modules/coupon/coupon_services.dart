@@ -22,13 +22,23 @@ class NFCECearaCouponService extends ICouponService {
     String endpoint = this.NFCECEARA_ENDPOINT + couponCode;
     final http.Response response = await http.get(endpoint);
     final responseJson = json.decode(response.body);
+    final normailizedJson = normalizeJsonCoupon(responseJson);
 
     Future<Coupon>coupon = Future<Coupon>( () {
-      return CouponFactory.fromJson(responseJson["coupon"]);
+      return CouponFactory.fromJson(normailizedJson["coupon"]);
     });
 
-    //Coupon coupon = CouponFactory.fromJson(responseJson["coupon"]);
-
     return coupon;
+  }
+
+  Map<dynamic, dynamic> normalizeJsonCoupon(Map<dynamic, dynamic> couponAsJson) {
+    if (couponAsJson['coupon']['taxpayerObservation'] != null) {
+      couponAsJson['coupon']['taxpayerObservation'] = couponAsJson['coupon']['taxpayerObservation'].split(" ")[0] + " " + couponAsJson['coupon']['taxpayerObservation'].split(" ")[1];
+    }
+    couponAsJson['coupon']['items'].forEach( (item) {
+      item['price'] = (item['price'] * 100).toInt();
+    });
+
+    return couponAsJson;
   }
 }

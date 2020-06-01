@@ -61,7 +61,7 @@ class CouponHeaderWidget extends StatelessWidget {
   
   Widget _getCouponValueWidget() {
     return Text(
-      " -- R\$" + (coupon.getTotalPrice().toString()),
+      "R\$" + (coupon.getTotalPrice() / 100).toString(),
       style: TextStyle(
         fontSize: 32,
         color: Colors.white,
