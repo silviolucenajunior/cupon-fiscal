@@ -3,27 +3,15 @@ import '../models/coupon_model.dart';
 
 class CouponThumbnailWidget extends StatelessWidget {
   Coupon coupon;
+  Color color;
 
-  CouponThumbnailWidget({Key key, this.coupon}) : super(key: key);
+  CouponThumbnailWidget({Key key, this.coupon, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // return Card(
-    //   child: Container(
-    //     padding: EdgeInsets.all(10),
-    //     width: 600,
-    //     child: Row(
-    //       mainAxisSize: MainAxisSize.min,
-    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //       children: <Widget>[
-    //         _getDateWidget(),
-    //         _getPriceWidget(),
-    //         _getStablishmentWidget(),
-    //       ]
-    //     )
-    //   )
-    // );
-    return Container(
+    return Card(
+      color: color,
+      child: Container(
         padding: EdgeInsets.all(10),
         width: 600,
         child: Row(
@@ -35,7 +23,21 @@ class CouponThumbnailWidget extends StatelessWidget {
             _getStablishmentWidget(),
           ]
         )
+      )
     );
+    // return Container(
+    //     padding: EdgeInsets.all(10),
+    //     width: 600,
+    //     child: Row(
+    //       mainAxisSize: MainAxisSize.min,
+    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    //       children: <Widget>[
+    //         _getDateWidget(),
+    //         _getPriceWidget(),
+    //         _getStablishmentWidget(),
+    //       ]
+    //     )
+    // );
   }
   
   Widget _getStablishmentWidget() {

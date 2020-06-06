@@ -4,6 +4,7 @@ import '../coupon_services.dart';
 import '../coupon_repository.dart';
 import '../coupon_factory.dart';
 import '../models/coupon_model.dart';
+import './coupon_number_input_dialog.dart';
 
 class CouponQRScanner extends StatefulWidget {
   final ICouponService couponService;
@@ -17,7 +18,7 @@ class CouponQRScanner extends StatefulWidget {
 
 class _CouponQRScannerState extends State<CouponQRScanner> {
   bool scanning = false;
-  bool scaned = false; //HACK is a hack to manipulate the multiple scan of dependency
+  bool scaned = false; //HACK is a hack to manipulate the multiple scan of used lib for qRScan
 
   @override
   Widget build( BuildContext context ) {
@@ -85,7 +86,6 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
                 scaned = true;
                 scanning = false;
               });
-              
             }
           },
         ),
@@ -122,6 +122,33 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
               ),
               Text(
                 "Scans",
+                style: TextStyle(
+                  fontSize: 12
+                )
+              )
+            ]
+          )
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        RaisedButton(
+          padding: EdgeInsets.all(10),
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return CouponNumberDialog();
+              }
+            );
+          },
+          child: Column(
+            children: [
+              Icon(
+                Icons.input
+              ),
+              Text(
+                "Digit",
                 style: TextStyle(
                   fontSize: 12
                 )
