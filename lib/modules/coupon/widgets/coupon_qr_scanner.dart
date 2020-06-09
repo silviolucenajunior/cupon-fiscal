@@ -26,7 +26,7 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
       child: Column(
         children: <Widget>[
           this._getScannerPreviewWidget(),
-          SizedBox(height: 10),
+          
           this._getScannerActions()
         ],
       ),
@@ -38,8 +38,8 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
     this.scanning 
     ? 
       Container(
-        width: 320,
-        height: 320,
+        width: 280,
+        height: 280,
         child: QrCamera(
           onError: (context, error) => Text(
             error.toString(),
@@ -92,8 +92,8 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
       )
     :
       Container(
-        width: 320,
-        height: 320,
+        width: 280,
+        height: 280,
         child: Icon(Icons.crop_free, size: 300, color: Colors.blue[300]),
       );
   }
