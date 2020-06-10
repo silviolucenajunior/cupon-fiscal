@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './coupon_factory.dart';
 import './models/coupon_model.dart';
-import './coupon_repository.dart';
 
 class ICouponService {
   Future<Coupon> getCouponInformationByCouponCode(String couponCode) async {
@@ -17,11 +16,11 @@ class ICouponService {
 }
 
 class NFCECearaCouponService extends ICouponService {
-  final String NFCECEARA_ENDPOINT = "https://cfe.sefaz.ce.gov.br:8443/portalcfews/mfe/fiscal-coupons/extract/";
+  static const String NFCECEARA_ENDPOINT = "https://cfe.sefaz.ce.gov.br:8443/portalcfews/mfe/fiscal-coupons/extract/";
 
   @override
   Future<Coupon> getCouponInformationByCouponCode(String couponCode ) async {
-    String endpoint = this.NFCECEARA_ENDPOINT + couponCode;
+    String endpoint = NFCECEARA_ENDPOINT + couponCode;
     final http.Response response = await http.get(endpoint);
     final responseJson = json.decode(response.body);
     if (isNotAValidResponse(responseJson)) {

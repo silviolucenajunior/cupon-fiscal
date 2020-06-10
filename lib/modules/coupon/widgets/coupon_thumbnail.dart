@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/coupon_model.dart';
 
 class CouponThumbnailWidget extends StatelessWidget {
-  Coupon coupon;
-  Color color;
+  final Coupon coupon;
+  final Color color;
 
   CouponThumbnailWidget({Key key, this.coupon, this.color}) : super(key: key);
 
@@ -25,19 +25,6 @@ class CouponThumbnailWidget extends StatelessWidget {
         )
       )
     );
-    // return Container(
-    //     padding: EdgeInsets.all(10),
-    //     width: 600,
-    //     child: Row(
-    //       mainAxisSize: MainAxisSize.min,
-    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //       children: <Widget>[
-    //         _getDateWidget(),
-    //         _getPriceWidget(),
-    //         _getStablishmentWidget(),
-    //       ]
-    //     )
-    // );
   }
   
   Widget _getStablishmentWidget() {

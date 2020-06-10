@@ -73,29 +73,6 @@ class CouponItemWidget extends StatelessWidget {
     );
   }
   
-  Widget _getUnitPriceWidget () {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        Text(
-          "Unt.",
-          style: TextStyle(
-            fontSize: 10,
-            color: Colors.black,
-          )
-        ),
-        Text(
-          r"R$" + item.price.toString(),
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.black,
-          )
-        )
-      ]
-    );
-  }
-  
   Widget _getTotalPriceWidget () {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

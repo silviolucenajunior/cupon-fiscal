@@ -4,7 +4,7 @@ import '../coupon_repository.dart';
 import '../coupon_services.dart';
 
 class HomeScreenCoupon extends StatelessWidget {
-  ICouponRepository couponRepository;
+  final ICouponRepository couponRepository;
 
   HomeScreenCoupon({Key key, this.couponRepository}) : super(key: key);
 

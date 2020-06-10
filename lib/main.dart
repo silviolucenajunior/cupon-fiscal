@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import './modules/coupon/coupon_routes.dart';
-
 
 void main() {
   runApp(
@@ -17,10 +15,6 @@ class MeuCuponApp extends StatelessWidget {
       theme: _getTheme(),
       onGenerateRoute: CouponRouteGenerator.generateRoute,
       initialRoute: '/',
-      home: DefaultTabController(
-        length: 2,
-        child: MeuCuponMainPage()
-      ),
     );
   }
 
