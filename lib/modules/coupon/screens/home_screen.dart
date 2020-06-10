@@ -58,9 +58,5 @@ class HomeScreenCoupon extends StatelessWidget {
       )
       
     );
-
-
-    
-    
   }
 }

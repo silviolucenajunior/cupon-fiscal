@@ -6,8 +6,10 @@ import './models/coupon_model.dart';
 import './coupon_repository.dart';
 
 class ICouponService {
-  Object getCouponInformationByCouponCode(String couponCode) async {
-    return Object;
+  Future<Coupon> getCouponInformationByCouponCode(String couponCode) async {
+    return Future<Coupon>(() {
+      return Coupon();
+    });
   }
 
   void save(Coupon coupon) {
@@ -22,6 +24,9 @@ class NFCECearaCouponService extends ICouponService {
     String endpoint = this.NFCECEARA_ENDPOINT + couponCode;
     final http.Response response = await http.get(endpoint);
     final responseJson = json.decode(response.body);
+    if (isNotAValidResponse(responseJson)) {
+      throw "Is not a valid response";
+    }
     final normailizedJson = normalizeJsonCoupon(responseJson);
 
     Future<Coupon>coupon = Future<Coupon>( () {
@@ -29,6 +34,14 @@ class NFCECearaCouponService extends ICouponService {
     });
 
     return coupon;
+  }
+
+  bool isNotAValidResponse(Map<dynamic, dynamic> couponAsJson) {
+    if (couponAsJson['status'] == 1) {
+      return true;
+    }
+
+    return false;
   }
 
   Map<dynamic, dynamic> normalizeJsonCoupon(Map<dynamic, dynamic> couponAsJson) {
@@ -41,4 +54,5 @@ class NFCECearaCouponService extends ICouponService {
 
     return couponAsJson;
   }
+
 }

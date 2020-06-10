@@ -26,7 +26,6 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
       child: Column(
         children: <Widget>[
           this._getScannerPreviewWidget(),
-          
           this._getScannerActions()
         ],
       ),
@@ -76,15 +75,24 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
             :
               null
           ,
-          qrCodeCallback: (code) async {
+          qrCodeCallback: (code) {
             if (scaned == false )  {
               setState(() => scaned = true);
               String couponCode = this._extractCouponCodeFromQRCode(code);
-              Coupon coupon = await this.widget.couponService.getCouponInformationByCouponCode(couponCode) as Coupon;
-              this.widget.couponRepository.save(coupon);
-              setState(() {
-                scaned = true;
-                scanning = false;
+
+              this.widget.couponService.getCouponInformationByCouponCode(couponCode)
+              .then( (Coupon coupon) {
+                this.widget.couponRepository.save(coupon);
+                setState(() {
+                  scaned = true;
+                  scanning = false;
+                });
+              })
+              .catchError ( (error) {
+                setState(() {
+                  scaned = true;
+                  scanning = false;
+                });
               });
             }
           },
@@ -134,13 +142,26 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
         ),
         RaisedButton(
           padding: EdgeInsets.all(10),
-          onPressed: () {
-            showDialog(
+          onPressed: () async {
+            var codigo = await showDialog(
               context: context,
               builder: (context) {
                 return CouponNumberDialog();
               }
             );
+            this.widget.couponService.getCouponInformationByCouponCode(codigo)
+            .then( (Coupon coupon) {
+                this.widget.couponRepository.save(coupon);
+                setState(() {
+                  scaned = true;
+                  scanning = false;
+                });
+              }).catchError( (error) {
+                setState(() {
+                  scaned = true;
+                  scanning = false;
+                });
+              });
           },
           child: Column(
             children: [
