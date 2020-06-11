@@ -1,0 +1,13 @@
+{
+    "name": "meu_cupon_fiscal",
+    "version": "1.0.0",
+    "description": "A new Flutter project.",
+    "husky": {
+        "hooks": {
+            "pre-commit": "flutter analyze"
+        }
+    },
+    "devDependencies": {
+        "husky": "^4.2.5"
+    }
+}
