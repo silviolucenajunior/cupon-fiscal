@@ -1,7 +1,7 @@
 {
     "name": "meu_cupon_fiscal",
     "version": "1.0.0",
-    "description": "A new Flutter project.",
+    "description": "Meu Coupon Flutter Project",
     "husky": {
         "hooks": {
             "pre-commit": "flutter analyze"
