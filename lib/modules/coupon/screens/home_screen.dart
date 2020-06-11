@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/coupon_qr_scanner.dart';
+import '../widgets/coupon_scan_actions.dart';
 import '../coupon_repository.dart';
 import '../coupon_services.dart';
 
@@ -21,10 +22,16 @@ class HomeScreenCoupon extends StatelessWidget {
   }
 
   Widget _getImportCouponWidget() {
-    return CouponQRScanner(
-      couponService: NFCECearaCouponService(),
-      couponRepository: this.couponRepository,
+    return Column(
+      children: <Widget>[
+        CouponQRScanner(
+          couponService: NFCECearaCouponService(),
+          couponRepository: this.couponRepository,
+        ),
+        CouponScanActions()
+      ]
     );
+    
   }
 
   Widget _getGraphsWidget() {
@@ -39,7 +46,6 @@ class HomeScreenCoupon extends StatelessWidget {
                   height: 300,
                 )
               )
-              
             ),
             Center(
               child:Container(
@@ -56,7 +62,6 @@ class HomeScreenCoupon extends StatelessWidget {
           ]
         )
       )
-      
     );
   }
 }

@@ -7,6 +7,7 @@ class MeuCuponMainPage extends StatelessWidget {
   @override
   Widget build (BuildContext context) {
     InMemoryCouponRepository repository = InMemoryCouponRepository();
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('Meu cupon')

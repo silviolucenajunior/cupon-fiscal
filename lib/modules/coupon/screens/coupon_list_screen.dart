@@ -20,19 +20,23 @@ class CouponListScreen extends StatelessWidget {
     List<Widget> items = [];
     this.couponRepository.getAll().asMap().forEach( (index, coupon) => {
       items.add(
-        Material(
-          child: InkWell(
-            splashFactory: InkRipple.splashFactory,
-            splashColor: Colors.white30,
-            onTap: () {
-              Navigator.of(context).pushNamed('/coupon', arguments: coupon);
-            },
-            child: CouponThumbnailWidget(coupon: coupon, color: Colors.blue[index % 2 == 0 ? 100 : 300],) 
-          )
-        )
+        this._getCouponThumbnailItem(context, coupon, Colors.blue[index % 2 == 0 ? 100 : 300])
       )
     });
 
     return items;
+  }
+
+  Widget _getCouponThumbnailItem(BuildContext context, coupon, color) {
+    return Material(
+      child: InkWell(
+        splashFactory: InkRipple.splashFactory,
+        splashColor: Colors.white30,
+        onTap: () {
+          Navigator.of(context).pushNamed('/coupon', arguments: coupon);
+        },
+        child: CouponThumbnailWidget(coupon: coupon, color: color) 
+      )
+    );
   }
 }

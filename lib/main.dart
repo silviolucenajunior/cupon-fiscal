@@ -25,4 +25,3 @@ class MeuCuponApp extends StatelessWidget {
     );
   }
 }
-

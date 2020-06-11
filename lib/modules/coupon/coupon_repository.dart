@@ -4,7 +4,9 @@ class ICouponRepository {
   void save(Coupon coupon) {
   }
 
-  List getAll() {}
+  List getAll() {
+    return List();
+  }
 }
 
 class InMemoryCouponRepository extends ICouponRepository {

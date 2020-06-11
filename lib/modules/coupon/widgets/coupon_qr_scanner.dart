@@ -25,8 +25,7 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
     return Container(
       child: Column(
         children: <Widget>[
-          this._getScannerPreviewWidget(),
-          this._getScannerActions()
+          this._getScannerPreviewWidget()
         ],
       ),
     );
@@ -110,97 +109,4 @@ class _CouponQRScannerState extends State<CouponQRScanner> {
     return code.split("|")[0];
   }
 
-  Widget _getScannerActions () {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        RaisedButton(
-          padding: EdgeInsets.all(10),
-          onPressed: () {
-            this.setState( () => {
-              this.scanning = !this.scanning
-            });
-            print(this.scanning);
-            print("Bo");
-          },
-          child: Column(
-            children: [
-              Icon(
-                Icons.photo_camera
-              ),
-              Text(
-                "Scans",
-                style: TextStyle(
-                  fontSize: 12
-                )
-              )
-            ]
-          )
-        ),
-        SizedBox(
-          width: 20,
-        ),
-        RaisedButton(
-          padding: EdgeInsets.all(10),
-          onPressed: () async {
-            var codigo = await showDialog(
-              context: context,
-              builder: (context) {
-                return CouponNumberDialog();
-              }
-            );
-            this.widget.couponService.getCouponInformationByCouponCode(codigo)
-            .then( (Coupon coupon) {
-                this.widget.couponRepository.save(coupon);
-                setState(() {
-                  scaned = true;
-                  scanning = false;
-                });
-              }).catchError( (error) {
-                setState(() {
-                  scaned = true;
-                  scanning = false;
-                });
-              });
-          },
-          child: Column(
-            children: [
-              Icon(
-                Icons.input
-              ),
-              Text(
-                "Digit",
-                style: TextStyle(
-                  fontSize: 12
-                )
-              )
-            ]
-          )
-        ),
-        SizedBox(
-          width: 20,
-        ),
-        RaisedButton(
-          padding: EdgeInsets.all(10),
-          onPressed: () {
-            Coupon coupon = CouponFactory.generateFakeCoupon();
-            this.widget.couponRepository.save(coupon);
-          },
-          child: Column(
-            children: [
-              Icon(
-                Icons.plus_one
-              ),
-              Text(
-                "Scans",
-                style: TextStyle(
-                  fontSize: 12
-                )
-              )
-            ]
-          )
-        )
-      ]
-    );
-  }
 }
