@@ -4,6 +4,24 @@ import '../widgets/coupon_scan_actions.dart';
 import '../coupon_repository.dart';
 import '../coupon_services.dart';
 
+class CouponInputCommandManager {
+  execute(command) {
+    switch(command) {
+      case 'scan':
+        print("Scan");
+        break;
+        //Do Camera Scan
+      case 'digit':
+        print("digit");
+        break;
+      case 'fake':
+        print('Make Fake');
+        break;
+       //DO Dialog Input
+    }
+  }
+}
+
 class HomeScreenCoupon extends StatelessWidget {
   final ICouponRepository couponRepository;
 
@@ -22,16 +40,18 @@ class HomeScreenCoupon extends StatelessWidget {
   }
 
   Widget _getImportCouponWidget() {
+    CouponInputCommandManager commandManager = new CouponInputCommandManager();
+
+    CouponQRScanner qrScanner = CouponQRScanner(
+      couponService: NFCECearaCouponService(),
+      couponRepository: this.couponRepository,
+    );
     return Column(
       children: <Widget>[
-        CouponQRScanner(
-          couponService: NFCECearaCouponService(),
-          couponRepository: this.couponRepository,
-        ),
-        CouponScanActions()
+        qrScanner,
+        CouponScanActions(commandManager: commandManager,)
       ]
     );
-    
   }
 
   Widget _getGraphsWidget() {

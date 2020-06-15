@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import '../coupon_services.dart';
-import '../coupon_repository.dart';
-import '../coupon_factory.dart';
-import '../models/coupon_model.dart';
-import './coupon_number_input_dialog.dart';
 
 class CouponScanActions extends StatelessWidget {
+  final commandManager;
+  CouponScanActions({Key key, this.commandManager }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -14,6 +12,7 @@ class CouponScanActions extends StatelessWidget {
         RaisedButton(
           padding: EdgeInsets.all(10),
           onPressed: () {
+            this.commandManager.execute('scan');
           },
           child: Column(
             children: [
@@ -34,7 +33,8 @@ class CouponScanActions extends StatelessWidget {
         ),
         RaisedButton(
           padding: EdgeInsets.all(10),
-          onPressed: () async {
+          onPressed: () {
+            this.commandManager.execute('digit');
             // var codigo = await showDialog(
             //   context: context,
             //   builder: (context) {
@@ -75,6 +75,7 @@ class CouponScanActions extends StatelessWidget {
         RaisedButton(
           padding: EdgeInsets.all(10),
           onPressed: () {
+            this.commandManager.execute('fake');
             // Coupon coupon = CouponFactory.generateFakeCoupon();
             // this.widget.couponRepository.save(coupon);
           },

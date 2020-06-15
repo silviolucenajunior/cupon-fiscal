@@ -1,13 +1,31 @@
 {
     "name": "meu_cupon_fiscal",
     "version": "1.0.0",
-    "description": "Meu Coupon Flutter Project",
+    "description": "A new Flutter project.",
+    "main": "index.js",
+    "directories": {
+        "lib": "lib",
+        "test": "test"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/silviolucenajunior/cupon-fiscal.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/silviolucenajunior/cupon-fiscal/issues"
+    },
+    "homepage": "https://github.com/silviolucenajunior/cupon-fiscal#readme",
+    "devDependencies": {
+        "husky": "^4.2.5"
+    },
     "husky": {
         "hooks": {
             "pre-commit": "flutter analyze"
         }
-    },
-    "devDependencies": {
-        "husky": "^4.2.5"
     }
 }
