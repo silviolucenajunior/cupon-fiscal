@@ -5,10 +5,13 @@ import '../coupon_repository.dart';
 import '../coupon_services.dart';
 
 class CouponInputCommandManager {
+  final qrScan;
+  CouponInputCommandManager({this.qrScan});
+
   execute(command) {
     switch(command) {
       case 'scan':
-        print("Scan");
+        this.qrScan.startScan();
         break;
         //Do Camera Scan
       case 'digit':
@@ -40,12 +43,12 @@ class HomeScreenCoupon extends StatelessWidget {
   }
 
   Widget _getImportCouponWidget() {
-    CouponInputCommandManager commandManager = new CouponInputCommandManager();
-
     CouponQRScanner qrScanner = CouponQRScanner(
       couponService: NFCECearaCouponService(),
       couponRepository: this.couponRepository,
     );
+    CouponInputCommandManager commandManager = new CouponInputCommandManager(qrScan: qrScanner);
+
     return Column(
       children: <Widget>[
         qrScanner,
