@@ -34,7 +34,7 @@ class CouponScanActions extends StatelessWidget {
         RaisedButton(
           padding: EdgeInsets.all(10),
           onPressed: () {
-            this.commandManager.execute('digit');
+            this.commandManager.execute('digit', context);
             // var codigo = await showDialog(
             //   context: context,
             //   builder: (context) {
