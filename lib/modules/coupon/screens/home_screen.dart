@@ -5,6 +5,7 @@ import '../coupon_repository.dart';
 import '../coupon_services.dart';
 import '../widgets/coupon_number_input_dialog.dart';
 import '../models/coupon_model.dart';
+import '../coupon_factory.dart';
 
 class CouponInputCommandManager {
   final qrScan;
@@ -12,7 +13,7 @@ class CouponInputCommandManager {
   final couponRepository;
   CouponInputCommandManager({this.qrScan, this.couponService, this.couponRepository});
 
-  execute(command, context) async {
+  execute(command, [context]) async {
     switch(command) {
       case 'scan':
         this.qrScan.startScan();
@@ -34,6 +35,8 @@ class CouponInputCommandManager {
         break;
       case 'fake':
         print('Make Fake');
+        Coupon coupon = CouponFactory.generateFakeCoupon();
+        this.couponRepository.save(coupon);
         break;
        //DO Dialog Input
     }
