@@ -1,5 +1,7 @@
+import 'dart:math';
 import './models/coupon_item_model.dart';
 import './models/coupon_model.dart';
+import './models/coupon_timeserie.dart';
 
 class CouponFactory {
 
@@ -41,5 +43,11 @@ class CouponFactory {
 
   static CouponItem generateFakeCouponItem() {
     return CouponItem(100, 10, "Maça");
+  }
+
+  static TimeSeriesCoupon generateFakeTimeSeriesCouponList (int day) {
+    DateTime date = DateTime.now();
+    print(date);
+    return new TimeSeriesCoupon( new Random().nextInt(130).toDouble(), date.add( Duration(days: day) ) );
   }
 }

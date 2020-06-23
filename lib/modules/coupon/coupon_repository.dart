@@ -25,3 +25,14 @@ class InMemoryCouponRepository extends ICouponRepository {
     return itemList;
   }
 }
+
+class LocalStorageRepository extends ICouponRepository {
+
+  @override
+  void save(Coupon coupon) {}
+
+  @override
+  List getAll() {
+    
+  }
+}

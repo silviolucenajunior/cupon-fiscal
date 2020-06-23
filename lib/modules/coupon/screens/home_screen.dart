@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/graphs/coupon_month_graph.dart';
 import '../widgets/coupon_qr_scanner.dart';
 import '../widgets/coupon_scan_actions.dart';
 import '../coupon_repository.dart';
@@ -85,12 +86,12 @@ class HomeScreenCoupon extends StatelessWidget {
         child: PageView(
           children: <Widget>[
             Center(
-              child: Card(
+              
                 child:Container(
-                  width: 300,
                   height: 300,
+                  child: CouponMonthGraphWidget()
                 )
-              )
+              
             ),
             Center(
               child:Container(

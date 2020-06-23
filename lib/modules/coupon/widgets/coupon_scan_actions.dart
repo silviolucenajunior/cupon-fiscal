@@ -35,25 +35,6 @@ class CouponScanActions extends StatelessWidget {
           padding: EdgeInsets.all(10),
           onPressed: () {
             this.commandManager.execute('digit', context);
-            // var codigo = await showDialog(
-            //   context: context,
-            //   builder: (context) {
-            //     return CouponNumberDialog();
-            //   }
-            // );
-            // this.widget.couponService.getCouponInformationByCouponCode(codigo)
-            // .then( (Coupon coupon) {
-            //     this.widget.couponRepository.save(coupon);
-            //     setState(() {
-            //       scaned = true;
-            //       scanning = false;
-            //     });
-            //   }).catchError( (error) {
-            //     setState(() {
-            //       scaned = true;
-            //       scanning = false;
-            //     });
-            //   });
           },
           child: Column(
             children: [
@@ -76,8 +57,6 @@ class CouponScanActions extends StatelessWidget {
           padding: EdgeInsets.all(10),
           onPressed: () {
             this.commandManager.execute('fake');
-            // Coupon coupon = CouponFactory.generateFakeCoupon();
-            // this.widget.couponRepository.save(coupon);
           },
           child: Column(
             children: [
