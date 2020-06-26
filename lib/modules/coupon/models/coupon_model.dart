@@ -27,4 +27,18 @@ class Coupon {
 
     return amount;
   }
+
+   Map<String, dynamic> toMap() {
+    Map<String, dynamic> couponAsMap = {
+      'stablishmentName': this.stablishmentName, 
+      'buyDate': this.buyDate, 
+      'items': this.items,
+      'city': this.city,
+      'state': this.state,
+      'neighborhood': this.neighborhood,
+      'address': this.address
+    };
+
+    return couponAsMap;
+  }
 }
