@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import '../coupon_repository.dart';
 import './home_screen.dart';
 import './coupon_list_screen.dart';
+import '../../../core/database.dart';
 
 class MeuCuponMainPage extends StatelessWidget {
   @override
   Widget build (BuildContext context) {
-    InMemoryCouponRepository repository = InMemoryCouponRepository();
+    // InMemoryCouponRepository repository = InMemoryCouponRepository();
+    LocalStorageRepository repository = LocalStorageRepository(SQLiteDatabase());
     
     return Scaffold(
       appBar: AppBar(

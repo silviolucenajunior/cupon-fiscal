@@ -6,15 +6,19 @@ import './models/coupon_timeserie.dart';
 class CouponFactory {
 
   static Coupon fromJson(Map<String, dynamic> json) {
-    List<CouponItem> items = CouponFactory._getItemsFromJson(json);
+    List<CouponItem> items = json.containsKey('items') ? CouponFactory._getItemsFromJson(json) : [];
     return Coupon(
-      stablishmentName: json['fantasyName'], 
-      buyDate: json['taxpayerObservation'], 
+      stablishmentName: json['stablishmentName'], 
+      // buyDate: json['taxpayerObservation'], 
+      buyDate: 'Droga',
       items: items,
-      city: json['address']['city']['name'],
-      neighborhood: json['address']['neighborhood'],
+      city: 'nada1',
+      neighborhood: 'nda3',
+      // city: "json['address']['city']['name']",
+      // neighborhood: "json['address']['neighborhood']",
       state: 'Ceará',
-      address: json['address']['street'] + " " + json['address']['number'],
+      // address: json['address']['street'] + " " + json['address']['number'],
+      address: 'nada3'
     );
   }
 
